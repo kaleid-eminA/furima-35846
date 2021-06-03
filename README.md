@@ -40,7 +40,7 @@
 - has_one :order
 
 
-## destination テーブル
+## destinations テーブル
 
 |Column|Type|Options|
 |---|---|---|
