@@ -15,8 +15,8 @@
 
 ### アソシエーション
 
-- has_many :products dependent: :destroy
-- has_many :orders dependent: :destroy
+- has_many :products
+- has_many :orders
 
 
 
@@ -45,12 +45,11 @@
 |Column|Type|Options|
 |---|---|---|
 |order|references|foreign_key: true|
-|user|references|foreign_key: true|
 |post_code|string|null: false|
 |prefecture_id|string|null: false|
 |city|string|null: false|
-|address1|string|null: false|
-|address2|string||
+|address|string|null: false|
+|building_name|string||
 
 ### アソシエーション
 
@@ -60,7 +59,7 @@ belongs_to :order
 
 |Column|Type|Options|
 |---|---|---|
-|buyer_user|references|foreign_key: true|
+|user|references|foreign_key: true|
 |product|references|foreign_key: true|
 
 ### アソシエーション
