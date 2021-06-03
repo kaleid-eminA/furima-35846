@@ -10,7 +10,7 @@
 |famiry_name_kana|string|null: false|
 |first_name_kana|string|null: false|
 |birth_date|date|null: false|
-|email|string|null: false|
+|email|string|null: false, uniqueness: true|
 |encrypted_password|string|null: false|
 
 ### アソシエーション
@@ -24,7 +24,7 @@
 
 |Column|Type|Options|
 |---|---|---|
-|user_id|references|foreign_key: true|
+|user|references|foreign_key: true|
 |name|string|null: false|
 |description|text|null: false|
 |condition_id|integer|null: false|
@@ -37,14 +37,16 @@
 ### アソシエーション
 
 - belongs_to :user
+- has_one :order
 
 
 ## destination テーブル
 
 |Column|Type|Options|
 |---|---|---|
-|user_id|references|foreign_key: true|
-|post_code|integer|null: false|
+|order|references|foreign_key: true|
+|user|references|foreign_key: true|
+|post_code|string|null: false|
 |prefecture_id|string|null: false|
 |city|string|null: false|
 |address1|string|null: false|
@@ -52,16 +54,17 @@
 
 ### アソシエーション
 
-- belongs_to :user
-
+belongs_to :order
 
 ## orders テーブル
 
 |Column|Type|Options|
 |---|---|---|
-|buyer_user_id|references|foreign_key: true|
-|product_id|references|foreign_key: true|
+|buyer_user|references|foreign_key: true|
+|product|references|foreign_key: true|
 
-###
+### アソシエーション
 
 - belongs_to :user
+- belongs_to :product
+- has_one :destination
