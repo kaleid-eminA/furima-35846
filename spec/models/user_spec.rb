@@ -34,19 +34,21 @@ RSpec.describe User, type: :model do
       end
       it 'passwordは6文字以上じゃないと登録できない' do
         @user.password = 'abc12'
+        @user.password_confirmation = 'abc12'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password",
-                                                      'Password is too short (minimum is 6 characters)', 'Password is too short (minimum is 6 characters)')
+        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
       it 'passwordは半角英数字混合がないと登録できない（英字）' do
         @user.password = 'abcdfg'
+        @user.password_confirmation = 'abcdfg'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it 'passwordは半角英数字混合がないと登録できない（数字）' do
         @user.password = '123456'
+        @user.password_confirmation = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", 'Password is invalid')
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it 'passwordとpasswrod(確認)は一致していることが必須である' do
         @user.password = '123abc'
@@ -89,7 +91,16 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
       end
-    end
+      it 'family_nameは全角の漢字・ひらがな・カタカナ以外では登楼できない' do
+        @user.family_name = 'ｱｲｳｴｵ12345/'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name is invalid")
+      end
+      it 'first_nameは全角の漢字・ひらがな・カタカナ以外では登楼できない' do
+        @user.first_name = 'ｱｲｳｴｵ12345/'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid")
+      end
 
     context '新規登録できるとき'
     it 'すべての項目が存在すれば登録できる' do
@@ -161,4 +172,5 @@ RSpec.describe User, type: :model do
       expect(@user).to be_valid
     end
   end
+end
 end
