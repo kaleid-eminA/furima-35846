@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_07_014435) do
+ActiveRecord::Schema.define(version: 2021_06_07_061435) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 2021_06_07_014435) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "categorises", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "categorises_id"
+    t.integer "categories_id"
   end
 
   create_table "conditions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2021_06_07_014435) do
   end
 
   create_table "days_to_ships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "days_to_ship_id", null: false
+    t.integer "days_to_ships_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 2021_06_07_014435) do
     t.string "name", default: "", null: false
     t.text "description", null: false
     t.integer "condition_id", null: false
-    t.integer "shipping_cost_id", null: false
+    t.integer "shipping_costs_id", null: false
     t.integer "prefecture_id", null: false
-    t.integer "days_to_ship_id", null: false
+    t.integer "days_to_ships_id", null: false
     t.integer "categories_id", null: false
     t.integer "price", null: false
     t.datetime "created_at", precision: 6, null: false

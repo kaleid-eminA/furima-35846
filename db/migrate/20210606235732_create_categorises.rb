@@ -1,6 +1,6 @@
-class CreateCategorises < ActiveRecord::Migration[6.0]
+class CreateCategories < ActiveRecord::Migration[6.0]
   def change
-    create_table :categorises do |t|
+    create_table :categories do |t|
 
       t.timestamps
     end

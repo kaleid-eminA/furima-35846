@@ -11,9 +11,9 @@ class Product < ApplicationRecord
   validates :description
   validates :categories_id
   validates :condition_id
-  validates :shipping_cost_id
+  validates :shipping_costs_id
   validates :prefecture_id
-  validates :days_to_ship_id
+  validates :days_to_ships_id
   validates :price, format: { with: VALID_PRICE_REGEX }
   end
 end
