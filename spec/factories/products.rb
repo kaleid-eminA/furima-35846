@@ -3,12 +3,12 @@ FactoryBot.define do
     image { Faker::Lorem.sentence }
     name { '商品の名前' }
     description { '商品の説明' }
-    condition_id { ' 3 '}
-    shipping_costs_id { '3' }
-    prefecture_id { '4' }
-    days_to_ships_id { '2' }
-    categories_id { '5' }
-    price { '10000' }
+    condition_id {  3 }
+    shipping_cost_id { 3 }
+    prefecture_id { 4 }
+    days_to_ship_id { 2 }
+    category_id { 5 }
+    price { 10000 }
 
     user
 

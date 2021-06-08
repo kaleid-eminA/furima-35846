@@ -22,9 +22,9 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Description can't be blank")
       end
       it 'カテゴリーを選択しないと出品できない' do
-        @product.categories_id = nil
+        @product.category_id = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("Categories can't be blank")
+        expect(@product.errors.full_messages).to include("Category can't be blank")
       end
       it '商品の状態を選択しないと出品できない' do
         @product.condition_id = nil
@@ -32,9 +32,9 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Condition can't be blank")
       end
       it '配送料の負担を選択しないと出品できない' do
-        @product.shipping_costs_id = nil
+        @product.shipping_cost_id = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("Shipping costs can't be blank")
+        expect(@product.errors.full_messages).to include("Shipping cost can't be blank")
       end
       it '発送元の地域を選択しないと出品できない' do
         @product.prefecture_id = nil
@@ -42,9 +42,9 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Prefecture can't be blank")
       end
       it '発送までの日数を選択しないと出品できない' do
-        @product.days_to_ships_id = nil
+        @product.days_to_ship_id = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("Days to ships can't be blank")
+        expect(@product.errors.full_messages).to include("Days to ship can't be blank")
       end
       it '価格を入れないと出品できない' do
         @product.price = nil
