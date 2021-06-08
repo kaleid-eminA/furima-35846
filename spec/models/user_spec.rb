@@ -36,19 +36,19 @@ RSpec.describe User, type: :model do
         @user.password = 'abc12'
         @user.password_confirmation = 'abc12'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'passwordは半角英数字混合がないと登録できない（英字）' do
         @user.password = 'abcdfg'
         @user.password_confirmation = 'abcdfg'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
       it 'passwordは半角英数字混合がないと登録できない（数字）' do
         @user.password = '123456'
         @user.password_confirmation = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
       it 'passwordとpasswrod(確認)は一致していることが必須である' do
         @user.password = '123abc'
@@ -94,83 +94,83 @@ RSpec.describe User, type: :model do
       it 'family_nameは全角の漢字・ひらがな・カタカナ以外では登楼できない' do
         @user.family_name = 'ｱｲｳｴｵ12345/'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name is invalid")
+        expect(@user.errors.full_messages).to include('Family name is invalid')
       end
       it 'first_nameは全角の漢字・ひらがな・カタカナ以外では登楼できない' do
         @user.first_name = 'ｱｲｳｴｵ12345/'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name is invalid")
+        expect(@user.errors.full_messages).to include('First name is invalid')
       end
 
-    context '新規登録できるとき'
-    it 'すべての項目が存在すれば登録できる' do
-      expect(@user).to be_valid
-    end
-    it 'ニックネームが空でなければ登録できる' do
-      @user.nickname = FactoryBot.build(:user, nickname: @user.nickname)
-      expect(@user).to be_valid
-    end
-    it 'メールアドレスが空でなければ登録できる' do
-      @user.email = 'email@com'
-      expect(@user).to be_valid
-    end
-    it 'メールアドレスに一意性があれば登録できる' do
-      @user.save
-      another_user = FactoryBot.build(:user, email: @user.email)
-      expect(@user).to be_valid
-    end
-    it 'メールアドレスに@があれば登録できる' do
-      @user.email = 'email@com'
-      expect(@user).to be_valid
-    end
-    it 'パスワードが空でなければ登録できる' do
-      @user.password = '123abc'
-      @user.password_confirmation = '123abc'
-      expect(@user).to be_valid
-    end
-    it 'パスワードが6文字以上であれば登録できる' do
-      @user.password = 'abc123'
-      @user.password_confirmation = 'abc123'
-      expect(@user).to be_valid
-    end
-    it 'パスワードは半角英数字混合であれば登録できる' do
-      @user.password = 'abc123'
-      @user.password_confirmation = 'abc123'
-      expect(@user).to be_valid
-    end
-    it 'パスワードとパスワード（確認）が一致していれば登録できる' do
-      @user.password = '123abc'
-      @user.password_confirmation = '123abc'
-      expect(@user).to be_valid
-    end
-    it 'family_nameが空でなければ登録できる' do
-      @user.family_name = '名字'
-      expect(@user).to be_valid
-    end
-    it 'first_nameが空でなければ登録できる' do
-      @user.first_name = '名前'
-      expect(@user).to be_valid
-    end
-    it 'family_name_kanaが空でなければ登録できる' do
-      @user.family_name_kana = 'ミョウジ'
-      expect(@user).to be_valid
-    end
-    it 'first_name_kanaが空でなければ登録できる' do
-      @user.first_name_kana = 'ナマエ'
-      expect(@user).to be_valid
-    end
-    it 'family_name_kanaが全角だと登録できる' do
-      @user.family_name_kana = 'ミョウジ'
-      expect(@user).to be_valid
-    end
-    it 'first_name_kanaが全角だと登録できる' do
-      @user.first_name_kana = 'ナマエ'
-      expect(@user).to be_valid
-    end
-    it 'birth_dateが空でなければ登録できる' do
-      @user.birth_date = '2000-01-01'
-      expect(@user).to be_valid
+      context '新規登録できるとき'
+      it 'すべての項目が存在すれば登録できる' do
+        expect(@user).to be_valid
+      end
+      it 'ニックネームが空でなければ登録できる' do
+        @user.nickname = FactoryBot.build(:user, nickname: @user.nickname)
+        expect(@user).to be_valid
+      end
+      it 'メールアドレスが空でなければ登録できる' do
+        @user.email = 'email@com'
+        expect(@user).to be_valid
+      end
+      it 'メールアドレスに一意性があれば登録できる' do
+        @user.save
+        another_user = FactoryBot.build(:user, email: @user.email)
+        expect(@user).to be_valid
+      end
+      it 'メールアドレスに@があれば登録できる' do
+        @user.email = 'email@com'
+        expect(@user).to be_valid
+      end
+      it 'パスワードが空でなければ登録できる' do
+        @user.password = '123abc'
+        @user.password_confirmation = '123abc'
+        expect(@user).to be_valid
+      end
+      it 'パスワードが6文字以上であれば登録できる' do
+        @user.password = 'abc123'
+        @user.password_confirmation = 'abc123'
+        expect(@user).to be_valid
+      end
+      it 'パスワードは半角英数字混合であれば登録できる' do
+        @user.password = 'abc123'
+        @user.password_confirmation = 'abc123'
+        expect(@user).to be_valid
+      end
+      it 'パスワードとパスワード（確認）が一致していれば登録できる' do
+        @user.password = '123abc'
+        @user.password_confirmation = '123abc'
+        expect(@user).to be_valid
+      end
+      it 'family_nameが空でなければ登録できる' do
+        @user.family_name = '名字'
+        expect(@user).to be_valid
+      end
+      it 'first_nameが空でなければ登録できる' do
+        @user.first_name = '名前'
+        expect(@user).to be_valid
+      end
+      it 'family_name_kanaが空でなければ登録できる' do
+        @user.family_name_kana = 'ミョウジ'
+        expect(@user).to be_valid
+      end
+      it 'first_name_kanaが空でなければ登録できる' do
+        @user.first_name_kana = 'ナマエ'
+        expect(@user).to be_valid
+      end
+      it 'family_name_kanaが全角だと登録できる' do
+        @user.family_name_kana = 'ミョウジ'
+        expect(@user).to be_valid
+      end
+      it 'first_name_kanaが全角だと登録できる' do
+        @user.first_name_kana = 'ナマエ'
+        expect(@user).to be_valid
+      end
+      it 'birth_dateが空でなければ登録できる' do
+        @user.birth_date = '2000-01-01'
+        expect(@user).to be_valid
+      end
     end
   end
-end
 end
