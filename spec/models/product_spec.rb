@@ -52,12 +52,12 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Price can't be blank")
       end
       it '価格は299以下では出品できない' do
-        @product.price = '100'
+        @product.price = 100
         @product.valid?
         expect(@product.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
       it '価格は10000000以上では出品できない' do
-        @product.price = '999999999'
+        @product.price = 999999999
         @product.valid?
         expect(@product.errors.full_messages).to include("Price must be less than or equal to 99999999")
       end
@@ -65,6 +65,21 @@ RSpec.describe Product, type: :model do
         @product.price = '１２００'
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is not a number")
+      end
+      it '金額は半角英数字混合では出品できない' do
+        @product.price = 'abc1500'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not a number")
+      end
+      it '金額は半角英語だけでは出品できない' do
+        @product.price = 'abcdefg'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not a number")
+      end
+      it '各Activehashカラムは1では出品できない' do
+        @product.category_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Category must be other than 1")
       end
 
       context '登録ができるとき'
@@ -84,31 +99,31 @@ RSpec.describe Product, type: :model do
         expect(@product).to be_valid
       end
       it 'カテゴリーを選択すると出品できる' do
-        @product.name = '3'
+        @product.name = 3
         expect(@product).to be_valid
       end
       it '商品の状態を選択すると出品できる' do
-        @product.name = '3'
+        @product.name = 3
         expect(@product).to be_valid
       end
       it '配送料の負担を選択すると出品できる' do
-        @product.name = '3'
+        @product.name = 3
         expect(@product).to be_valid
       end
       it '発送元の地域を選択すると出品できる' do
-        @product.name = '3'
+        @product.name = 3
         expect(@product).to be_valid
       end
       it '発送までの日数を選択すると出品できる' do
-        @product.name = '3'
+        @product.name = 3
         expect(@product).to be_valid
       end
       it '300-9999999の間で価格を入れると出品できる' do
-        @product.name = '5000'
+        @product.name = 5000
         expect(@product).to be_valid
       end
       it '価格は半角数字で入力すれば出品できる' do
-        @product.name = '8000'
+        @product.name = 8000
         expect(@product).to be_valid
       end
     end
