@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   VALID_PRICE_REGEX = /\A[0-9]+\z/
 
   with_options presence: true do
+  validates :image
   validates :name
   validates :description
   validates :categories_id
@@ -14,6 +15,7 @@ class Product < ApplicationRecord
   validates :shipping_costs_id
   validates :prefecture_id
   validates :days_to_ships_id
-  validates :price, format: { with: VALID_PRICE_REGEX }
+  validates :price, format: { with: VALID_PRICE_REGEX },
+   numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 99999999}
   end
 end
