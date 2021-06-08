@@ -10,11 +10,13 @@ class Product < ApplicationRecord
     validates :image
     validates :name
     validates :description
-    validates :category_id, numericality: { other_than: 1 }
-    validates :condition_id, numericality: { other_than: 1 }
-    validates :shipping_cost_id, numericality: { other_than: 1 }
-    validates :prefecture_id, numericality: { other_than: 1 }
-    validates :days_to_ship_id, numericality: { other_than: 1 }
+    with_options numericality: { other_than: 1 } do
+      validates :category_id
+      validates :condition_id
+      validates :shipping_cost_id
+      validates :prefecture_id
+      validates :days_to_ship_id
+    end
     validates :price, format: { with: VALID_PRICE_REGEX },
                       numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 99_999_999 }
   end
