@@ -1,6 +1,11 @@
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
+  belongs_to :shipping_cost
+  belongs_to :categoryes
+  belongs_to :condition
+  belongs_to :prefecture
+  belongs_to :days_to_ship
   # has_one :order
   has_one_attached :image
 
