@@ -20,11 +20,9 @@ class Categoryes < ActiveHash::Base
     { id: 18, name: 'スポーツ' },
     { id: 19, name: 'レジャー' },
     { id: 20, name: 'ハンドメイド' },
-    { id: 21, name: 'その他' },
+    { id: 21, name: 'その他' }
   ]
-  
-    include ActiveHash::Associations
-    has_many :products
 
-  
+  include ActiveHash::Associations
+  has_many :products
 end
