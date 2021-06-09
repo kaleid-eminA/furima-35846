@@ -49,9 +49,8 @@ class ProductsController < ApplicationController
   end
 
   def correct_products
-
-  unless @products.user.id == current_user.id
-    redirect_to root_path
+     unless @products.user.id == current_user.id
+        redirect_to root_path
+     end
   end
-end
 end
