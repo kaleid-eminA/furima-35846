@@ -30,9 +30,12 @@ class ProductsController < ApplicationController
   
   def update
     @products = Product.find(params[:id])
-    @products.update(products_params)
+    if @products.update(products_params)
     redirect_to show
+    else
+      render :edit
   end
+end
 
   
 
@@ -46,9 +49,8 @@ class ProductsController < ApplicationController
 
   def correct_products
     @products = Product.find(params[:id])
-unless @products.user.id == current_user.id
-  redirect_to root_path
+  unless @products.user.id == current_user.id
+    redirect_to root_path
+  end
 end
-end
-
 end
