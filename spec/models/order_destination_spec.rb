@@ -9,6 +9,11 @@ RSpec.describe OrderDestination, type: :model do
       sleep 0.1
     end
     context '購入できないとき' do
+      it 'tokenがなければ購入できない' do
+        @destination.token = nil
+        @destination.valid?
+        expect(@destination.errors.full_messages).to include("Token can't be blank")
+      end
       it '郵便番号が無いと購入できない' do
         @destination.post_code = nil
         @destination.valid?
