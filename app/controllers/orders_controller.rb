@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :index]
-  before_action :move_to_index, only: [:index, :create]
-  before_action :move_to_top, only: [:index, :create]
+  before_action :move_to_top,        only: [:index, :create]
+  before_action :move_to_index,      only: [:index, :create]
+  
 
   def index
     @order_destination = OrderDestination.new
@@ -37,11 +38,11 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path unless @products.user.id == current_user.id
+    redirect_to root_path if @products.order.present?
   end
 
   def move_to_top
     @products = Product.find(params[:product_id])
-    redirect_to root_path if @products.user_id != current_user.id || @products.user_id == current_user.id
+    redirect_to root_path if  @products.user_id == current_user.id
   end
 end
