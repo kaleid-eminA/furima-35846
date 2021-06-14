@@ -10,7 +10,6 @@ class OrdersController < ApplicationController
   def create
     @products = Product.find(params[:product_id])
     @order_destination = OrderDestination.new(order_destination_params)
-    redirect_to root_path if @products.user_id != current_user.id
     if @order_destination.valid?
       pay_product
       @order_destination.save
