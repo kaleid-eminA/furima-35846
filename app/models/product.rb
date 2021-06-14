@@ -23,6 +23,6 @@ class Product < ApplicationRecord
       validates :days_to_ship_id
     end
     validates :price, format: { with: VALID_PRICE_REGEX },
-                      numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 99_999_999 }
+                      numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   end
 end
