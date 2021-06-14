@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :move_to_index, only: [:create, :index]
+  before_action :authenticate_user!, only: [:create, :index]
+  before_action :move_to_index, only: [:index, :create]
   before_action :move_to_top, only: [:index, :create]
+
   def index
     @order_destination = OrderDestination.new
   end
@@ -9,9 +10,7 @@ class OrdersController < ApplicationController
   def create
     @products = Product.find(params[:product_id])
     @order_destination = OrderDestination.new(order_destination_params)
-    if @products.user_id != current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if @products.user_id != current_user.id
     if @order_destination.valid?
       pay_product
       @order_destination.save
@@ -19,7 +18,6 @@ class OrdersController < ApplicationController
     else
       render :index
     end
-    
   end
 
   private
@@ -45,8 +43,6 @@ class OrdersController < ApplicationController
 
   def move_to_top
     @products = Product.find(params[:product_id])
-    if @products.user_id != current_user.id || @products.user_id == current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if @products.user_id != current_user.id || @products.user_id == current_user.id
   end
 end

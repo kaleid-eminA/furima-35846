@@ -56,8 +56,6 @@ class ProductsController < ApplicationController
   end
 
   def products_order_root
-    if @products.order.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if @products.order.present?
   end
 end
