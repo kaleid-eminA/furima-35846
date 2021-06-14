@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   belongs_to :condition
   belongs_to :prefecture
   belongs_to :days_to_ship
-  # has_one :order
+  has_one :order
   has_one_attached :image
 
   VALID_PRICE_REGEX = /\A[0-9]+\z/
