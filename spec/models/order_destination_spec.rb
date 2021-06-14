@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrderDestination, type: :model do
-  describe '#' do
+  describe '商品の購入' do
     before do
       user = FactoryBot.create(:user)
       product = FactoryBot.create(:product)
@@ -9,6 +9,16 @@ RSpec.describe OrderDestination, type: :model do
       sleep 0.1
     end
     context '購入できないとき' do
+      it 'user_idがなければ購入できない' do
+        @destination.user_id = nil
+        @destination.valid?
+        expect(@destination.errors.full_messages).to include("User can't be blank")
+      end
+      it 'product_idがなければ購入できない' do
+        @destination.product_id = nil
+        @destination.valid?
+        expect(@destination.errors.full_messages).to include("Product can't be blank")
+      end
       it 'tokenがなければ購入できない' do
         @destination.token = nil
         @destination.valid?
@@ -26,6 +36,11 @@ RSpec.describe OrderDestination, type: :model do
       end
       it '郵便番号は半角文字列でなければ購入できない' do
         @destination.post_code = '３７０−０５３４'
+        @destination.valid?
+        expect(@destination.errors.full_messages).to include('Post code is invalid')
+      end
+      it '郵便番号は文字混合では購入できない' do
+        @destination.post_code = '370-さんさんさんさん'
         @destination.valid?
         expect(@destination.errors.full_messages).to include('Post code is invalid')
       end
@@ -61,6 +76,11 @@ RSpec.describe OrderDestination, type: :model do
       end
       it '電話番号は半角数字以外では購入できない' do
         @destination.phone_number = '０８０１２１２３４３４'
+        @destination.valid?
+        expect(@destination.errors.full_messages).to include('Phone number is invalid')
+      end
+      it '電話番号は数字以外登録できない' do
+        @destination.phone_number = 'でんわばんごう'
         @destination.valid?
         expect(@destination.errors.full_messages).to include('Phone number is invalid')
       end
